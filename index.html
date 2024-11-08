@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRITEX.DEV</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+        :root {
+            --background: #1a1b26;
+            --text: #ffa07a;
+            --border: #ffa07a;
+            --hover: #ff8c61;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .site-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .navigation a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navigation a:hover {
+            color: var(--hover);
+        }
+
+        .content-box {
+            border: 2px solid var(--border);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .banner-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-block {
+            margin-bottom: 1.5rem;
+        }
+
+        .text-block em {
+            font-style: normal;
+            color: #fff;
+        }
+
+        .links {
+            margin-top: 1rem;
+        }
+
+        .links a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            color: var(--hover);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .content-box {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            BRITEX.DEV
+        </header>
+
+        <nav class="navigation">
+            <a href="#home">Home</a>
+            <a href="#about">About Me</a>
+            <a href="#projects">Projects</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <main class="content-box">
+            <img src="src/75feec7d2a02e8095331ae310025653b.gif" alt="Banner" class="banner-image">
+
+            <div class="title">
+                Estas en BRITEX.DEV
+            </div>
+
+
+            <div class="text-block">
+                Este es el sitio web de Britex , conocido en línea por pertenecer a la comunidad de FNF Development y ser creador de contenido.
+            </div>
+
+            <div class="text-block">
+                Britex es un estudiante, desarrollador de juegos y creador de contenido a tiempo completo que ha estado desarrollando juegos desde 2023. Es posible que los conozca por su trabajo en proyectos como <em>FNF Genesis Engine</em>, y su contenido educativo sobre el desarrollo de FNF en varias plataformas.
+            </div>
+
+            <div class="text-block">
+                Su enfoque actual es crear tutoriales y guías integrales para la comunidad de desarrollo de FNF, mientras se trabaja en proyectos innovadores que traspasan los límites de lo que es posible con las tecnologías web con proyectos ambiciosos.
+            </div>
+
+            <div class="text-block">
+                Consulte la página <a href="#about">About Me</a> para obtener más información sobre el, sus <a href="#projects">Proyectos</a> para ver su último trabajo o <a href="#contact">Contacto</a> para conectarse a través de sus plataformas sociales.
+            </div>
+
+            <div class="links">
+                > Encuentrame en:
+                <br>
+                <a href="#"><i class="fab fa-youtube" style="font-size: 21px; color: red;"></i>YouTube</a> | 
+                <a href="#"><i class="fab fa-tiktok" style="font-size: 25x; color: black;"></i>TikTok</a> | 
+                <a href="#"><i class="fab fa-instagram" style="font-size: 21px; color: #E1306C;"></i>Instagram</a> | 
+                <a href="#"><i class="fab fa-discord" style="font-size: 21px; color: #7289DA;"></i>Discord</a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
