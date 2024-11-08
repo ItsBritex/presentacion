@@ -27,6 +27,14 @@
             color: var(--text);
             background-color: var(--background);
             padding: 2rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.light-mode {
+            --background: #ffffff;
+            --text: #333333;
+            --border: #333333;
+            --hover: #555555;
         }
 
         .container {
@@ -34,11 +42,85 @@
             margin: 0 auto;
         }
 
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(26, 27, 38, 0.8);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        body.light-mode .top-nav {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .switch-container {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin: 0 0.5rem;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
         .site-header {
             text-align: center;
             margin-bottom: 2rem;
             font-size: 1.5rem;
             font-weight: 500;
+            margin-top: 4rem;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInDown 0.5s ease forwards 0.5s;
         }
 
         .navigation {
@@ -47,22 +129,28 @@
             gap: 1.5rem;
             margin-bottom: 2rem;
             flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 1s;
         }
 
         .navigation a {
             color: var(--text);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .navigation a:hover {
             color: var(--hover);
+            transform: scale(1.1);
         }
 
         .content-box {
             border: 2px solid var(--border);
             padding: 2rem;
             margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards 1.5s;
         }
 
         .banner-image {
@@ -70,34 +158,86 @@
             max-height: 300px;
             object-fit: cover;
             margin-bottom: 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .banner-image.loaded {
+            opacity: 1;
         }
 
         .title {
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 2s;
         }
 
         .text-block {
             margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            animation-delay: calc(2.5s + (var(--order) * 0.5s));
         }
 
-        .text-block em {
+        .text-block .emphasis {
             font-style: normal;
             color: #fff;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .text-block .emphasis:hover {
+            transform: scale(1.1);
         }
 
         .links {
             margin-top: 1rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 4.5s;
         }
 
         .links a {
             color: var(--text);
             text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
         }
 
         .links a:hover {
             color: var(--hover);
-            text-decoration: underline;
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         @media (max-width: 600px) {
@@ -112,48 +252,65 @@
     </style>
 </head>
 <body>
+    <nav class="top-nav">
+        <div class="switch-container">
+            🇲🇽
+            <label class="switch">
+                <input type="checkbox" id="language-toggle">
+                <span class="slider"></span>
+            </label>
+            🇺🇸
+        </div>
+        <div class="switch-container">
+            <i class="fas fa-moon" style="font-size: 29px; color: #4b4b4b;"></i>
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+            <i class="fas fa-sun" style="font-size: 29px; color: gold;"></i>
+        </div>
+    </nav>
+
     <div class="container">
         <header class="site-header">
             BRITEX.DEV
         </header>
 
         <nav class="navigation">
-            <a href="#home">Home</a>
-            <a href="#about">About Me</a>
-            <a href="#projects">Projects</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>
+            <a href="#home" data-es="Inicio" data-en="Home">Inicio</a>
+            <a href="#about" data-es="Sobre Mí" data-en="About Me">Sobre Mí</a>
+            <a href="#projects" data-es="Proyectos" data-en="Projects">Proyectos</a>
+            <a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a>
         </nav>
 
         <main class="content-box">
-            <img src="src/75feec7d2a02e8095331ae310025653b.gif" alt="Banner" class="banner-image">
+            <img src="src/75feec7d2a02e8095331ae310025653b.gif" alt="Banner" class="banner-image" id="banner-image">
 
-            <div class="title">
-                Estas en BRITEX.DEV
+            <div class="title" data-es="Estás en BRITEX.DEV" data-en="You are at BRITEX.DEV">
+                Estás en BRITEX.DEV
             </div>
 
-
-            <div class="text-block">
-                Este es el sitio web de Britex , conocido en línea por pertenecer a la comunidad de FNF Development y ser creador de contenido.
+            <div class="text-block" data-es="Este es el sitio web de Britex, conocido en línea por pertenecer a la comunidad de FNF Development y ser creador de contenido." data-en="This is Britex's website, known online for being part of the FNF Development community and being a content creator." style="--order: 0;">
+                Este es el sitio web de Britex, conocido en línea por pertenecer a la comunidad de FNF Development y ser creador de contenido.
             </div>
 
-            <div class="text-block">
-                Britex es un estudiante, desarrollador de juegos y creador de contenido a tiempo completo que ha estado desarrollando juegos desde 2023. Es posible que los conozca por su trabajo en proyectos como <em>FNF Genesis Engine</em>, y su contenido educativo sobre el desarrollo de FNF en varias plataformas.
+            <div class="text-block" data-es="Britex es un estudiante, desarrollador de juegos y creador de contenido a tiempo completo que ha estado desarrollando juegos desde 2023. Es posible que los conozca por su trabajo en proyectos como <span class='emphasis'>FNF Genesis Engine</span>, y su contenido educativo sobre el desarrollo de FNF en varias plataformas." data-en="Britex is a student, full-time game developer and content creator who has been developing games since 2023. You may know them for their work on projects like <span class='emphasis'>FNF Genesis Engine</span>, and their educational content about FNF development across various platforms." style="--order: 1;">
+                Britex es un estudiante, desarrollador de juegos y creador de contenido a tiempo completo que ha estado desarrollando juegos desde 2023. Es posible que los conozca por su trabajo en proyectos como <span class="emphasis">FNF Genesis Engine</span>, y su contenido educativo sobre el desarrollo de FNF en varias plataformas.
             </div>
 
-            <div class="text-block">
+            <div class="text-block" data-es="Su enfoque actual es crear tutoriales y guías integrales para la comunidad de desarrollo de FNF, mientras se trabaja en proyectos innovadores que traspasan los límites de lo que es posible con las tecnologías web con proyectos ambiciosos." data-en="Their current focus is creating comprehensive tutorials and guides for the FNF development community, while working on innovative projects that push the boundaries of what's possible with web technologies through ambitious projects." style="--order: 2;">
                 Su enfoque actual es crear tutoriales y guías integrales para la comunidad de desarrollo de FNF, mientras se trabaja en proyectos innovadores que traspasan los límites de lo que es posible con las tecnologías web con proyectos ambiciosos.
             </div>
 
-            <div class="text-block">
-                Consulte la página <a href="#about">About Me</a> para obtener más información sobre el, sus <a href="#projects">Proyectos</a> para ver su último trabajo o <a href="#contact">Contacto</a> para conectarse a través de sus plataformas sociales.
+            <div class="text-block" style="--order: 3;">
+                <span data-es="Consulte la página" data-en="Check out the">Consulte la página</span> <a href="#about" data-es="Sobre Mí" data-en="About Me">Sobre Mí</a> <span data-es="para obtener más información sobre él, sus" data-en="to learn more about him, his">para obtener más información sobre él, sus</span> <a href="#projects" data-es="Proyectos" data-en="Projects">Proyectos</a> <span data-es="para ver su último trabajo o" data-en="to see his latest work or">para ver su último trabajo o</span> <a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a> <span data-es="para conectarse a través de sus plataformas sociales." data-en="to connect through his social platforms.">para conectarse a través de sus plataformas sociales.</span>
             </div>
 
             <div class="links">
-                > Encuentrame en:
+                <span data-es="> Encuéntrame en:" data-en="> Find me on:"> Encuéntrame en:</span>
                 <br>
                 <a href="#"><i class="fab fa-youtube" style="font-size: 21px; color: red;"></i>YouTube</a> | 
-                <a href="#"><i class="fab fa-tiktok" style="font-size: 25x; color: black;"></i>TikTok</a> | 
+                <a href="#"><i class="fab fa-tiktok" style="font-size: 25px; color: black;"></i>TikTok</a> | 
                 <a href="#"><i class="fab fa-instagram" style="font-size: 21px; color: #E1306C;"></i>Instagram</a> | 
                 <a href="#"><i class="fab fa-discord" style="font-size: 21px; color: #7289DA;"></i>Discord</a>
             </div>
@@ -168,6 +325,49 @@
                     behavior: 'smooth'
                 });
             });
+        });
+
+        const languageToggle = document.getElementById('language-toggle');
+        const themeToggle = document.getElementById('theme-toggle');
+        const bannerImage = document.getElementById('banner-image');
+
+        languageToggle.addEventListener('change', function() {
+            const lang = this.checked ? 'en' : 'es';
+            document.querySelectorAll('[data-es]').forEach(el => {
+    el.innerHTML = el.getAttribute(`data-${lang}`);
+});
+
+        });
+
+        themeToggle.addEventListener('change', function() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                fadeOutImage(bannerImage, function() {
+                    bannerImage.src = 'src/tenor.gif';
+                    fadeInImage(bannerImage);
+                });
+            } else {
+                fadeOutImage(bannerImage, function() {
+                    bannerImage.src = 'src/75feec7d2a02e8095331ae310025653b.gif';
+                    fadeInImage(bannerImage);
+                });
+            }
+        });
+
+        function fadeOutImage(image, callback) {
+            image.style.opacity = 0;
+            setTimeout(callback, 500);
+        }
+
+        function fadeInImage(image) {
+            setTimeout(function() {
+                image.style.opacity = 1;
+            }, 50);
+        }
+
+        // Cargar imagen del banner
+        window.addEventListener('load', function() {
+            bannerImage.classList.add('loaded');
         });
     </script>
 </body>
