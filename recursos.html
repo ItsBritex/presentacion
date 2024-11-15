@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursos - BRITEX.DEV</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "pub-5597512060825027",
+            enable_page_level_ads: true
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+        :root {
+            --background: url(src/astromy.jpg);
+            --text: #ffa07a;
+            --border: #ffa07a;
+            --hover: #ff8c61;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            line-height: 1.6;
+            color: var(--text);
+            background-image: var(--background);
+            padding: 2rem;
+            transition: background-image 0.3s, color 0.3s;
+        }
+
+        body.light-mode {
+            --background: url(src/astromy-light.jpg);
+            --text: #333333;
+            --border: #333333;
+            --hover: #555555;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(26, 27, 38, 0.8);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        body.light-mode .top-nav {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .switch-container {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin: 0 0.5rem;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .site-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-top: 4rem;
+            border: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            border: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .navigation a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navigation a:hover {
+            color: var(--hover);
+        }
+
+        .content-box {
+            border: 2px solid var(--border);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .banner-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+        }
+
+        .resource-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .resource-cards div {
+            cursor: pointer;
+        }
+
+        .resource-card {
+            border: 1px solid var(--border);
+            padding: 1rem;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, background-image 0.5s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+
+        #codigo {
+            background-image: url('src/resources/code-dark.gif');
+        }
+
+        body.light-mode #codigo {
+            background-image: url('src/resources/code-light.gif');
+        }
+
+        #redes {
+            background-image: url('src/social-dark.jpg');
+        }
+
+        body.light-mode #redes {
+            background-image: url('src/social-light.jpg');
+        }
+
+        #descargas {
+            background-image: url('src/resources/descargas.jpg');
+        }
+
+        body.light-mode #descargas {
+            background-image: url('src/download-light.jpg');
+        }
+
+        #extras {
+            background-image: url('src/extras-dark.jpg');
+        }
+
+        body.light-mode #extras {
+            background-image: url('src/extras-light.jpg');
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .content-box {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="switch-container">
+            🇲🇽
+            <label class="switch">
+                <input type="checkbox" id="language-toggle">
+                <span class="slider"></span>
+            </label>
+            🇺🇸
+        </div>
+        <div class="switch-container">
+            <i class="fas fa-moon" style="font-size: 29px; color: #4b4b4b;"></i>
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+            <i class="fas fa-sun" style="font-size: 29px; color: gold;"></i>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="site-header">
+            BRITEX.DEV
+        </header>
+
+        <nav class="navigation">
+            <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a>
+            <a href="#" data-es="Sobre Mí" data-en="About Me">Sobre Mí</a>
+            <a href="proyectos.html" data-es="Proyectos" data-en="Projects">Proyectos</a>
+            <a href="#" data-es="Contacto" data-en="Contact">Contacto</a>
+            <a href="recursos.html" data-es="Recursos" data-en="Resources">Recursos</a>
+        </nav>
+
+        <main class="content-box">
+            <img src="src/descarga.gif" alt="Banner" class="banner-image" id="banner-image">
+
+            <div class="resource-cards">
+                <div id="codigo" class="resource-card" style="background-image: url(src/resources/code-dark.gif);">
+                    <h3 data-es="Código" data-en="Code">Código</h3>
+                </div>
+                <div id="redes" class="resource-card" style="background-image: url(src/resources/social.gif);">
+                    <h3 data-es="Redes" data-en="Social">Redes</h3>
+                </div>
+                <div id="descargas" class="resource-card" style="background-image: url(src/resources/descargas.jpg);">
+                    <h3 data-es="Descargas" data-en="Downloads">Descargas</h3>
+                </div>
+                <div id="extras" class="resource-card" style="background-image: url(src/resources/extras.jpg);">
+                    <h3 data-es="Extras" data-en="Extras">Extras</h3>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const languageToggle = document.getElementById('language-toggle');
+        const themeToggle = document.getElementById('theme-toggle');
+        const bannerImage = document.getElementById('banner-image');
+
+        languageToggle.addEventListener('change', function() {
+            const lang = this.checked ? 'en' : 'es';
+            document.querySelectorAll('[data-es]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            });
+        });
+
+        themeToggle.addEventListener('change', function() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                bannerImage.src = 'src/tenor.gif';
+            } else {
+                bannerImage.src = 'src/descarga.gif';
+            }
+        });
+    </script>
+</body>
+</html>

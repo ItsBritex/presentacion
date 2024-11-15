@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos - BRITEX.DEV</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+        :root {
+            --background: #1a1b26;
+            --text: #ffa07a;
+            --border: #ffa07a;
+            --hover: #ff8c61;
+            --cambio: rgb(234, 255, 0);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+            padding: 2rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.light-mode {
+            --background: #ffffff;
+            --text: #333333;
+            --border: #333333;
+            --hover: #555555;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(26, 27, 38, 0.8);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        body.light-mode .top-nav {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .switch-container {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin: 0 0.5rem;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .site-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-top: 4rem;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInDown 0.5s ease forwards 0.5s;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 1s;
+        }
+
+        .navigation a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .navigation a:hover {
+            color: var(--hover);
+            transform: scale(1.1);
+        }
+
+        .content-box {
+            border: 2px solid var(--border);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards 1.5s;
+        }
+
+        .banner-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .banner-image.loaded {
+            opacity: 1;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 2s;
+        }
+
+        .project {
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            animation-delay: calc(2.5s + (var(--order) * 0.5s));
+        }
+
+        .project h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            padding: 1em;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .project p {
+            margin-bottom: 1rem;
+        }
+
+        .project a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .project a:hover {
+            color: var(--cambio);
+            transform: scale(1.1);
+        }
+
+        #fnf-genesis-engine {
+            background-image: url('src/fnf-monster-the-mall-background.webp');
+            transition: background-image 0.5s ease;
+        }
+
+        body.light-mode #fnf-genesis-engine {
+            background-image: url('src/fnf-daddy-dearest-mommy-mearest-the-mall-background.jpg');
+        }
+
+        #fnf-tutorial-series {
+            background-image: url('src/banner.jpg');
+            transition: background-image 0.5s ease;
+        }
+
+        body.light-mode #fnf-tutorial-series {
+            background-image: url('src/banner-light.gif');
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .content-box {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="switch-container">
+            🇲🇽
+            <label class="switch">
+                <input type="checkbox" id="language-toggle">
+                <span class="slider"></span>
+            </label>
+            🇺🇸
+        </div>
+        <div class="switch-container">
+            <i class="fas fa-moon" style="font-size: 29px; color: #4b4b4b;"></i>
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+            <i class="fas fa-sun" style="font-size: 29px; color: gold;"></i>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="site-header">
+            BRITEX.DEV
+        </header>
+
+        <nav class="navigation">
+            <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a>
+            <a href="#" data-es="Sobre Mí" data-en="About Me">Sobre Mí</a>
+            <a href="proyectos.html" data-es="Proyectos" data-en="Projects">Proyectos</a>
+            <a href="#" data-es="Contacto" data-en="Contact">Contacto</a>
+            <a href="recursos.html" data-es="Recursos" data-en="Resources">Recursos</a>
+        </nav>
+
+        <main class="content-box">
+            <img src="src/75feec7d2a02e8095331ae310025653b.gif" alt="Banner" class="banner-image" id="banner-image">
+
+            <div class="title" data-es="Mis Proyectos" data-en="My Projects">
+                Mis Proyectos
+            </div>
+
+            <div class="project" style="--order: 0;">
+                <h3 id="fnf-genesis-engine" data-es="FNF Genesis Engine" data-en="FNF Genesis Engine">FNF Genesis Engine</h3>
+                <p data-es="Un motor de juego personalizado para Friday Night Funkin', diseñado para ofrecer un rendimiento óptimo y facilidad de uso para los modders." data-en="A custom game engine for Friday Night Funkin', designed for optimal performance and ease of use for modders.">
+                    Un motor de juego personalizado para Friday Night Funkin', diseñado para ofrecer un rendimiento óptimo y facilidad de uso para los modders.
+                </p>
+                <iframe src="https://itsbritex.github.io/Genesis-Engine-FNF/" frameborder="30px" style="height: 25em; width: 100%; position: cover; padding: 1em;"></iframe> <br>
+                <a href="https://github.com/ItsBritex/Genesis-Engine-FNF" data-es="Ver Proyecto" data-en="View Project">Ver Proyecto</a>
+            </div>
+
+            <div class="project" style="--order: 1;">
+                <h3 id="fnf-tutorial-series" data-es="Serie de Tutoriales FNF" data-en="FNF Tutorial Series">Serie de Tutoriales FNF</h3>
+                <p data-es="Una serie completa de tutoriales en video que cubren todos los aspectos del desarrollo de mods para Friday Night Funkin'." data-en="A comprehensive video tutorial series covering all aspects of Friday Night Funkin' mod development.">
+                    Una serie completa de tutoriales en video que cubren todos los aspectos del desarrollo de mods para Friday Night Funkin'.
+                </p>
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/vBtZ7Xt-Jz8?si=Pp_XvpOIHanGyTF4" style="position: cover; padding: 1em;" title="YouTube video player" frameborder="30px" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> <br>
+                <a href="https://www.youtube.com/@ImBritex/videos" data-es="Ver Serie" data-en="View Series">Ver Serie</a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        const languageToggle = document.getElementById('language-toggle');
+        const themeToggle = document.getElementById('theme-toggle');
+        const bannerImage = document.getElementById('banner-image');
+
+        languageToggle.addEventListener('change', function() {
+            const lang = this.checked ? 'en' : 'es';
+            document.querySelectorAll('[data-es]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            });
+        });
+
+        themeToggle.addEventListener('change', function() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                fadeOutImage(bannerImage, function() {
+                    bannerImage.src = 'src/tenor.gif';
+                    fadeInImage(bannerImage);
+                });
+            } else {
+                fadeOutImage(bannerImage, function() {
+                    bannerImage.src = 'src/75feec7d2a02e8095331ae310025653b.gif';
+                    fadeInImage(bannerImage);
+                });
+            }
+        });
+
+        function fadeOutImage(image, callback) {
+            image.style.opacity = 0;
+            setTimeout(callback, 500);
+        }
+
+        function fadeInImage(image) {
+            setTimeout(function() {
+                image.style.opacity = 1;
+            }, 50);
+        }
+
+        // Load banner image
+        window.addEventListener('load', function() {
+            bannerImage.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
